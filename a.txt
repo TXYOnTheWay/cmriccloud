@@ -1,0 +1,2 @@
+I am tianxiyang.
+I'm studying git
