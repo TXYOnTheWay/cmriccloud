@@ -1,0 +1,42 @@
+http_load
+web服务器的吞吐量与负载测试 http_load
+程序非常小，解压后也不到100K
+
+http_load以并行复用的方式运行，用以测试web服务器的吞吐量与负载。但是它不同于大多数压力测试工
+
+具，它可以以一个单一的进程运行，一般不会把客户机搞死。还可以测试HTTPS类的网站请求。
+
+wget http://soft.vpser.net/test/http_load/http_load-12mar2006.tar.gz
+tar zxvf http_load-12mar2006.tar.gz
+cd http_load-12mar2006
+make && make install
+
+命令格式：http_load  -p 并发访问进程数  -s 访问时间  需要访问的URL文件
+
+参数其实可以自由组合，参数之间的选择并没有什么限制。比如你写成http_load -parallel 5 -seconds
+
+300 urls.txt也是可以的。我们把参数给大家简单说明一下。
+-parallel 简写-p ：含义是并发的用户进程数。
+-fetches 简写-f ：含义是总计的访问次数
+-rate    简写-p ：含义是每秒的访问频率
+-seconds简写-s ：含义是总计的访问时间
+
+准备URL文件：urllist.txt，文件格式是每行一个URL，URL最好超过50－100个测试效果比较好
+
+[root@it-testtool-1 cmrivm]# http_load  -p 100 -s 10 urllist.txt                  (1个url)   
+93247 fetches, 100 max parallel, 4.56631e+08 bytes, in 10.0001 seconds
+4897 mean bytes/connection
+9324.64 fetches/sec, 4.56628e+07 bytes/sec
+msecs/connect: 0.16318 mean, 9.33 max, 0.019 min
+msecs/first-response: 7.68131 mean, 20.119 max, 0.293 min
+HTTP response codes:
+  code 403 -- 93247
+
+[root@it-testtool-1 cmrivm]# http_load  -p 100 -s 10 urllist.txt              (30个url)
+95829 fetches, 100 max parallel, 4.69275e+08 bytes, in 10 seconds
+4897 mean bytes/connection
+9582.9 fetches/sec, 4.69275e+07 bytes/sec
+msecs/connect: 0.145944 mean, 9.474 max, 0.02 min
+msecs/first-response: 8.80518 mean, 31.644 max, 0.354 min
+HTTP response codes:
+  code 403 -- 95829
