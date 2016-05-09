@@ -1,0 +1,45 @@
+1、Linux压力测试工具webbench适用系统：Linux
+
+2、Linux压力测试工具webbench编译安装：
+
+yum install -y install gcc
+yum install -y ctags
+wget http://static.chenpeng.info/uploads/2012/12/webbench-1.5.tar.gz
+tar zxvf webbench-1.5.tar.gz
+cd webbench-1.5
+mkdir /usr/local/man 
+make && make install
+
+3、Linux压力测试工具webbench使用：
+
+webbench -c 500 -t 30 参数说明：-c表示并发数，-t表示时间(秒)
+-c 500：表示同时产生500个并发连接
+-t 30：表示持续30秒
+
+备注：webbench最大可以模拟30000个并发连接
+4、Linux压力测试工具webbench测试结果示例1：
+[root@localhost ~]# webbench -c 10000 -t 60 http://127.0.0.1/
+Webbench - Simple Web Benchmark 1.5
+Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.
+
+Benchmarking: GET http://127.0.0.1/
+10000 clients, running 60 sec.
+
+Speed=389218 pages/min, 33519530 bytes/sec.
+Requests: 389218 susceed, 0 failed.
+
+5、Linux压力测试工具webbench测试结果示例2：
+[root@it-testtool-1 ~]# webbench -c 10000 -t 30 http://127.0.0.1/
+Webbench - Simple Web Benchmark 1.5
+Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.
+
+Benchmarking: GET http://127.0.0.1/
+10000 clients, running 30 sec.
+
+Speed=437448 pages/min, 37672984 bytes/sec.
+Requests: 218724 susceed, 0 failed.
+
+
+
+
+
